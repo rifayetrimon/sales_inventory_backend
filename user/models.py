@@ -30,7 +30,6 @@ class UserManager(BaseUserManager):
 
 
 
-
 class User(AbstractBaseUser):
     
     is_active = models.BooleanField(default=True)
@@ -49,3 +48,7 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
+   
