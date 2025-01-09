@@ -12,6 +12,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 User = get_user_model()
 
 
+
+# User Registration 
 class UserRegistrationView(APIView):
     def post(self, request):
         searializer = UserRegistrationSerializer(data=request.data)
@@ -28,6 +30,7 @@ class UserRegistrationView(APIView):
         }, status=status.HTTP_400_BAD_REQUEST)
     
 
+# User Login
 class UserLoginView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -52,7 +55,7 @@ class UserLoginView(APIView):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+# Send OTP
 class sentOtpView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -79,7 +82,7 @@ class sentOtpView(APIView):
         }, status=status.HTTP_200_OK)
 
 
-
+# Verify OTP
 class VerifyOtpView(APIView):
     def post(self, request):
         email = request.data.get("email")
@@ -109,3 +112,13 @@ class VerifyOtpView(APIView):
                 'status': 'error',
                 'message': 'Invalid OTP'
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+# Reset Password
+
+class ResetPasswordView(APIView):
+    def post(self, request):
+        password = request.data.get("password")
+        print(request.user)
+    
+
