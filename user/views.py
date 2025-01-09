@@ -1,6 +1,7 @@
 import random
 from django.contrib.auth import authenticate, get_user_model
 from django.core.mail import send_mail
+from rest_framework import permissions
 from rest_framework.views import APIView
 from . serializers import UserRegistrationSerializer
 from rest_framework.response import Response
@@ -117,8 +118,23 @@ class VerifyOtpView(APIView):
 # Reset Password
 
 class ResetPasswordView(APIView):
+    permission_classes = (permissions.IsAuthenticated)
     def post(self, request):
         password = request.data.get("password")
-        print(request.user)
+
+        if not password:
+            return Response({
+                'status': 'error',
+                'message': 'Password is required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        user = request.user
+        user.set_password(password)
+        user.save()
+
+        return Response({
+            'status': 'success',
+            'message': 'Password reset successfully'
+        }, status=status.HTTP_200_OK)
     
 
