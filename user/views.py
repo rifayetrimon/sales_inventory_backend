@@ -118,7 +118,7 @@ class VerifyOtpView(APIView):
 # Reset Password
 
 class ResetPasswordView(APIView):
-    permission_classes = (permissions.IsAuthenticated)
+    permission_classes = [permissions.IsAuthenticated]
     def post(self, request):
         password = request.data.get("password")
 
