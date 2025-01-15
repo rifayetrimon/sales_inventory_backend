@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.core.mail import send_mail
 from rest_framework import permissions
 from rest_framework.views import APIView
-from . serializers import UserRegistrationSerializer
+from . serializers import UserProfileSerializer, UserRegistrationSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -138,3 +138,46 @@ class ResetPasswordView(APIView):
         }, status=status.HTTP_200_OK)
     
 
+
+# User Profile
+
+class UserProfileView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        user_data = UserProfileSerializer(user).data
+
+
+        return Response({
+            'status': 'success',
+            'message': 'Request successful',
+            'data': user_data,
+        }, status=status.HTTP_200_OK
+        )
+    
+
+
+
+# user update 
+
+class UserProfileUpdateView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def put(self, request):
+        user = request.user
+        user_data = UserProfileSerializer(user, data=request.data, partial=True)
+
+        if user_data.is_valid():
+            user_data.save()
+            return Response({
+                'status': 'success',
+                'message': 'User updated successfully'
+            }, status=status.HTTP_200_OK)
+
+        return Response({
+            'status': 'error',
+            'message': 'Invalid data'
+        }, status=status.HTTP_400_BAD_REQUEST)
+       
+    

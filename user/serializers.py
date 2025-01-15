@@ -16,3 +16,17 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             user.set_password(password)  # Hash the password
         user.save()
         return user
+
+
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['firstName', 'lastName', 'email', 'mobile']
+        read_only_fields = ['email']
+
+        # extra_kwargs = {
+        #     "email" : {"read_only": True}
+        # }
+

@@ -5,7 +5,9 @@ from user.views import (
     UserRegistrationView, 
     sentOtpView, 
     VerifyOtpView, 
-    ResetPasswordView
+    ResetPasswordView,
+    UserProfileView,
+    UserProfileUpdateView
 )
 
 
@@ -17,4 +19,6 @@ urlpatterns = [
     path("/send-otp", sentOtpView.as_view(), name="send-otp"),
     path("/verify-otp", VerifyOtpView.as_view(), name="verify-otp"),
     path("/reset-password", ResetPasswordView.as_view(), name="reset-password"),
+    path("/user-profile", UserProfileView.as_view(), name="user-profile"),
+    path("/user-update", UserProfileUpdateView.as_view(), name="update-profile"),
 ]   
