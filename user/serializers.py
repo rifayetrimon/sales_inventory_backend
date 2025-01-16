@@ -28,5 +28,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         # extra_kwargs = {
         #     "email" : {"read_only": True}
+        #     "password": {"write_only": True}
         # }
 

@@ -181,3 +181,26 @@ class UserProfileUpdateView(APIView):
         }, status=status.HTTP_400_BAD_REQUEST)
        
     
+
+# logout 
+
+class UserLogoutView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data.get('refresh_token')
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({
+                'status': 'success',
+                'message': 'User Logged out successfully'
+            }, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': 'Invalid token'
+            }, status=status.HTTP_400_BAD_REQUEST)
+    

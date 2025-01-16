@@ -7,7 +7,8 @@ from user.views import (
     VerifyOtpView, 
     ResetPasswordView,
     UserProfileView,
-    UserProfileUpdateView
+    UserProfileUpdateView,
+    UserLogoutView
 )
 
 
@@ -21,4 +22,5 @@ urlpatterns = [
     path("/reset-password", ResetPasswordView.as_view(), name="reset-password"),
     path("/user-profile", UserProfileView.as_view(), name="user-profile"),
     path("/user-update", UserProfileUpdateView.as_view(), name="update-profile"),
+    path("/logout", UserLogoutView.as_view(), name="user-logout")
 ]   
