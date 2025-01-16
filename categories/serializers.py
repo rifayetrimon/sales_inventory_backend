@@ -8,6 +8,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'user_id', 'name','created_at', 'updated_at']
 
-    def create(self, validated_data):
-        validated_data['user_id'] = self.context['request'].user.id
-        return super().create(validated_data)
+    # def create(self, validated_data):
+    #     validated_data['user_id'] = self.context['request'].user.id
+    #     return super().create(validated_data)
