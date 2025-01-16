@@ -48,7 +48,7 @@ class CategoryCreateView(APIView):
             )
 
         if searilized_data.is_valid():
-            searilized_data.save(user_id= request.user.id)
+            searilized_data.save(user= request.user.id)
             return Response({
                 'status': 'success',
                 'message': 'Category created successfully',
