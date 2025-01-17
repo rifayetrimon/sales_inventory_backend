@@ -111,3 +111,28 @@ class CustomerDeleteView(APIView):
                 'message': 'Customer not found',
                 'data': []
             }, status=status.HTTP_404_NOT_FOUND)
+        
+
+# customer detail
+
+# class CustomerDetailView(APIView):
+#     permission_classes = [permissions.IsAuthenticated]
+
+#     def get(self, request):
+#         customer_id = request.data.get('id')
+
+#         try:
+#             customer = Customer.objects.get(id=customer_id, user_id = request.user.id)
+#             serialized_customer = CustomerSerializer(customer)
+#             return Response({
+#                 'status': 'success',
+#                 'message': 'Customer found',
+#                 'data': serialized_customer.data
+#             }, status=status.HTTP_200_OK)
+        
+#         except Customer.DoesNotExist:
+#             return Response({
+#                 'status': 'error',
+#                 'message': 'Customer not found',
+#                 'data': []
+#             }, status=status.HTTP_404_NOT_FOUND)
